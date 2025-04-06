@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,5 +48,15 @@ class AuthController extends Controller
         return response()->json([
             'token' => $token->plainTextToken
         ]);
+    }
+
+    /**
+     * User logout
+     */
+    public function logout(Request $request): Response
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->noContent();
     }
 }
