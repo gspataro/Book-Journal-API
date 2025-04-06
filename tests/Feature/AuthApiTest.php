@@ -38,3 +38,21 @@ describe('auth:register', function () {
         $response->assertStatus(422);
     });
 });
+
+describe('auth:login', function () {
+    it('authenticates a user', function () {
+        $password = fake()->password(8);
+        $user = User::factory()->create([
+            'password' => $password
+        ]);
+
+        $response = $this->postJson('/api/login', [
+            'email' => $user->email,
+            'password' => $password
+        ]);
+
+        $response->assertOk()->assertJsonStructure([
+            'token'
+        ]);
+    });
+});
