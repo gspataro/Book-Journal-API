@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Rules\Isbn;
 use App\Services\BookService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class BookController extends Controller
 {
@@ -19,7 +20,7 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request): BookResource
     {
         $perPage = $request->get('per_page', 12);
         $books = $this->bookService->paginate($perPage);
@@ -30,7 +31,7 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): BookResource
     {
         // @todo Modify this implementation to integrate external ISBN API
         $validated = $request->validate([
@@ -53,7 +54,7 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Book $book)
+    public function show(Book $book): BookResource
     {
         return new BookResource($book);
     }
@@ -61,7 +62,7 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, Book $book): BookResource
     {
         $validated = $request->validate([
             'isbn' => ['sometimes', new Isbn(), 'unique:books,isbn'],
@@ -84,7 +85,7 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Book $book)
+    public function destroy(Book $book): Response
     {
         $this->bookService->delete($book);
 
