@@ -61,9 +61,24 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Book $book)
     {
-        //
+        $validated = $request->validate([
+            'isbn' => ['sometimes', new Isbn(), 'unique:books,isbn'],
+            'title' => 'sometimes|string',
+            'authors' => 'sometimes|string',
+            'publisher' => 'sometimes|nullable|string',
+            'edition' => 'sometimes|nullable|string',
+            'language' => 'sometimes|nullable|string',
+            'publication_date' => 'sometimes|nullable|date|before:now',
+            'image' => 'sometimes|nullable|string',
+            'pages' => 'sometimes|nullable|integer',
+            'description' => 'sometimes|nullable|string'
+        ]);
+
+        $updated = $this->bookService->update($book, $validated);
+
+        return new BookResource($updated);
     }
 
     /**

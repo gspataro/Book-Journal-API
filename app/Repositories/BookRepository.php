@@ -28,4 +28,18 @@ class BookRepository
     {
         return Book::create($data);
     }
+
+    /**
+     * Edit a book
+     *
+     * @param Book $book
+     * @param array<mixed> $data
+     * @return Book
+     */
+    public function update(Book $book, array $data): Book
+    {
+        $book->update($data);
+
+        return $book;
+    }
 }
