@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Book;
 use App\Repositories\BookRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -21,5 +22,16 @@ class BookService
     public function paginate(int $perPage = 12): LengthAwarePaginator
     {
         return $this->repository->paginate($perPage);
+    }
+
+    /**
+     * Create a book
+     *
+     * @param array<mixed> $data
+     * @return Book
+     */
+    public function create(array $data): Book
+    {
+        return $this->repository->create($data);
     }
 }

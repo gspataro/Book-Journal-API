@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BookResource;
+use App\Rules\Isbn;
 use App\Services\BookService;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,22 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // @todo Modify this implementation to integrate external ISBN API
+        $validated = $request->validate([
+            'isbn' => ['required', new Isbn(), 'unique:books,isbn'],
+            'title' => 'required|string',
+            'authors' => 'required|string',
+            'publisher' => 'nullable|string',
+            'edition' => 'nullable|string',
+            'language' => 'nullable|string',
+            'publication_date' => 'nullable|date|before:now',
+            'image' => 'nullable|string',
+            'pages' => 'nullable|integer',
+            'description' => 'nullable|string'
+        ]);
+        $book = $this->bookService->create($validated);
+
+        return new BookResource($book);
     }
 
     /**

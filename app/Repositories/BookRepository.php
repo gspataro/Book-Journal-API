@@ -17,4 +17,15 @@ class BookRepository
     {
         return Book::paginate($perPage);
     }
+
+    /**
+     * Create a book
+     *
+     * @param array<mixed> $data
+     * @return Book
+     */
+    public function create(array $data): Book
+    {
+        return Book::create($data);
+    }
 }
