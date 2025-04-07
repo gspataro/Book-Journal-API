@@ -65,3 +65,18 @@ describe('book:show', function () {
         ]);
     });
 });
+
+describe('book:update', function () {
+    it('updates a book', function () {
+        $book = Book::factory()->create();
+        $newDescription = fake()->text();
+
+        $response = $this->putJson('/api/book/' . $book->id, [
+            'description' => $newDescription
+        ]);
+
+        $response->assertOk()->assertJsonFragment([
+            'description' => $newDescription
+        ]);
+    });
+});
