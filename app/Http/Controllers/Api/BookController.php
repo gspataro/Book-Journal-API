@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BookResource;
+use App\Models\Book;
 use App\Rules\Isbn;
 use App\Services\BookService;
 use Illuminate\Http\Request;
@@ -52,9 +53,9 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Book $book)
     {
-        //
+        return new BookResource($book);
     }
 
     /**
