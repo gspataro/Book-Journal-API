@@ -17,7 +17,7 @@ class BookService
      * Paginate books
      *
      * @param integer $perPage
-     * @return LengthAwarePaginator
+     * @return LengthAwarePaginator<int, \App\Models\Book>
      */
     public function paginate(int $perPage = 12): LengthAwarePaginator
     {
