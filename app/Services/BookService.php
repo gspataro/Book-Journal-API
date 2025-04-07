@@ -40,7 +40,7 @@ class BookService
      *
      * @param Book $book
      * @param array<mixed> $data
-     * @return bool
+     * @return Book
      */
     public function update(Book $book, array $data): Book
     {
