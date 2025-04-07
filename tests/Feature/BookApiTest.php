@@ -54,3 +54,14 @@ describe('book:store', function () {
         $response->assertStatus(422);
     });
 });
+
+describe('book:show', function () {
+    it('shows a book', function () {
+        $book = Book::factory()->create();
+        $response = $this->getJson('/api/book/' . $book->id);
+
+        $response->assertOk()->assertJsonFragment([
+            'isbn' => $book->isbn
+        ]);
+    });
+});
