@@ -23,7 +23,7 @@ class BookFactory extends Factory
             'publisher' => fake()->company(),
             'edition' => fake()->text(),
             'language' => fake()->languageCode(),
-            'publication_date' => fake()->dateTime(),
+            'publication_date' => fake()->dateTime()->format('Y-m-d H:i:s'),
             'image' => fake()->imageUrl(),
             'pages' => fake()->randomNumber(4),
             'description' => fake()->text()
