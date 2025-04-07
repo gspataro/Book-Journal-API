@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\BookRepository;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryProvider extends ServiceProvider
@@ -11,7 +13,9 @@ class RepositoryProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(BookRepository::class, function (Application $app) {
+            return new BookRepository();
+        });
     }
 
     /**
