@@ -46,4 +46,15 @@ class BookService
     {
         return $this->repository->update($book, $data);
     }
+
+    /**
+     * Delete a book
+     *
+     * @param Book $book
+     * @return bool
+     */
+    public function delete(Book $book): bool
+    {
+        return $this->repository->delete($book);
+    }
 }

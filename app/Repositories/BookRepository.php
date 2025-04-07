@@ -42,4 +42,15 @@ class BookRepository
 
         return $book;
     }
+
+    /**
+     * Delete a book
+     *
+     * @param Book $book
+     * @return bool
+     */
+    public function delete(Book $book): bool
+    {
+        return $book->delete();
+    }
 }
