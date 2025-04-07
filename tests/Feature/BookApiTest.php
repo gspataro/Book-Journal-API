@@ -80,3 +80,16 @@ describe('book:update', function () {
         ]);
     });
 });
+
+describe('book:destroy', function () {
+    it('deletes a book', function () {
+        $book = Book::factory()->create();
+
+        $response = $this->deleteJson('/api/book/' . $book->id);
+
+        $response->assertStatus(204);
+        $this->assertDatabaseMissing('books', [
+            'id' => $book->id
+        ]);
+    });
+});
