@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Book;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Pagination\Paginator;
 
 class BookRepository
 {
@@ -11,9 +11,9 @@ class BookRepository
      * Paginate books
      *
      * @param integer $perPage
-     * @return LengthAwarePaginator<int, \App\Models\Book>
+     * @return Paginator<int, \App\Models\Book>
      */
-    public function paginate(int $perPage = 12): LengthAwarePaginator
+    public function paginate(int $perPage = 12): Paginator
     {
         return Book::paginate($perPage);
     }

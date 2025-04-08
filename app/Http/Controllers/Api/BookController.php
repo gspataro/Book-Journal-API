@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Rules\Isbn;
 use App\Services\BookService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
 class BookController extends Controller
@@ -20,12 +21,12 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): BookResource
+    public function index(Request $request): AnonymousResourceCollection
     {
         $perPage = $request->get('per_page', 12);
         $books = $this->bookService->paginate($perPage);
 
-        return new BookResource($books);
+        return BookResource::collection($books);
     }
 
     /**
